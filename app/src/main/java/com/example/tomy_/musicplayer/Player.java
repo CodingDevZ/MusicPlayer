@@ -13,7 +13,7 @@ import android.widget.SeekBar;
 import java.io.File;
 import java.util.ArrayList;
 
-public class Player extends AppCompatActivity implements View.OnClickListener {
+public class Player extends AppCompatActivity {
 
     static MediaPlayer mp;
     ArrayList<File> mySongs;
@@ -31,46 +31,8 @@ public class Player extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
-
-        if (mp != null) {
-            mp.stop();
-            mp.release();
-        }
-
-        updateSeekBar = new Thread() {
-            @Override
-            public void run() {
-                int totalDuration = mp.getDuration();
-                int currentPosition = 0;
-                while (currentPosition < totalDuration) {
-                    try {
-                        sleep(500);
-                        currentPosition = mp.getCurrentPosition();
-                        seekBar.setProgress(currentPosition);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                //super.run();
-            }
-        };
-
-        Intent i = getIntent();
-        Bundle bundle = i.getExtras();
-
-        mySongs = (ArrayList) bundle.getParcelableArrayList("songlist");
-        position = bundle.getInt("pos", 0);
-
-        u = Uri.parse(mySongs.get(position).toString());
-        mp = MediaPlayer.create(getApplicationContext(), u);
-        mp.start();
-        seekBar.setMax(mp.getDuration());
-
-        updateSeekBar.start();
-
         initWidgets();
         setupListeners();
-
     }
 
     private void initWidgets() {
@@ -83,11 +45,56 @@ public class Player extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void setupListeners() {
-
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (mp.isPlaying()) {
+                    btnPlay.setText(">");
+                    mp.pause();
+                } else mp.start();
+                btnPlay.setText("||");
+            }
+        });
+        btnForw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mp.seekTo(mp.getCurrentPosition() + 5000);
+            }
+        });
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mp.seekTo(mp.getCurrentPosition() - 5000);
+            }
+        });
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mp.stop();
+                mp.release();
+                position = (position + 1) & mySongs.size();
+                u = Uri.parse(mySongs.get(position).toString());
+                mp = MediaPlayer.create(getApplicationContext(), u);
+                mp.start();
+                seekBar.setMax(mp.getDuration());
+            }
+        });
+        btnPrev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mp.stop();
+                mp.release();
+                position = (position - 1 < 0) ? mySongs.size() - 1 : position - 1;
+                /*if (position -1 < 0){
+                    position = mySongs.size() - 1;
+                }
+                else{
+                    position = position - 1;
+                }*/
+                u = Uri.parse(mySongs.get(position).toString());
+                mp = MediaPlayer.create(getApplicationContext(), u);
+                seekBar.setMax(mp.getDuration());
+                mp.start();
             }
         });
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -106,49 +113,44 @@ public class Player extends AppCompatActivity implements View.OnClickListener {
                 mp.seekTo(seekBar.getProgress());
             }
         });
+        if (mp != null) {
+            mp.stop();
+            mp.release();
+        }
+        updateSeekBar = new Thread() {
+            @Override
+            public void run() {
+                int totalDuration = mp.getDuration();
+                int currentPosition = 0;
+                while (currentPosition < totalDuration) {
+                    try {
+                        sleep(500);
+                        currentPosition = mp.getCurrentPosition();
+                        seekBar.setProgress(currentPosition);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                //super.run();
+            }
+        };
+        Intent i = getIntent();
+        Bundle bundle = i.getExtras();
+
+        mySongs = (ArrayList) bundle.getParcelableArrayList("songlist");
+        position = bundle.getInt("pos", 0);
+
+        u = Uri.parse(mySongs.get(position).toString());
+        mp = MediaPlayer.create(getApplicationContext(), u);
+        mp.start();
+        seekBar.setMax(mp.getDuration());
+
+        updateSeekBar.start();
     }
 
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        switch (id) {
-            case R.id.btnPlay:
-                if (mp.isPlaying()) {
-                    btnPlay.setText(">");
-                    mp.pause();
-                } else mp.start();
-                btnPlay.setText("||");
-                break;
-            case R.id.btnForw:
-                mp.seekTo(mp.getCurrentPosition() + 5000);
-                break;
-            case R.id.btnBack:
-                mp.seekTo(mp.getCurrentPosition() - 5000);
-                break;
-            case R.id.btnNext:
-                mp.stop();
-                mp.release();
-                position = (position + 1) & mySongs.size();
-                u = Uri.parse(mySongs.get(position).toString());
-                mp = MediaPlayer.create(getApplicationContext(), u);
-                mp.start();
-                seekBar.setMax(mp.getDuration());
-                break;
-            case R.id.btnPrev:
-                mp.stop();
-                mp.release();
-                position = (position - 1 < 0) ? mySongs.size() - 1 : position - 1;
-                /*if (position -1 < 0){
-                    position = mySongs.size() - 1;
-                }
-                else{
-                    position = position - 1;
-                }*/
-                u = Uri.parse(mySongs.get(position).toString());
-                mp = MediaPlayer.create(getApplicationContext(), u);
-                seekBar.setMax(mp.getDuration());
-                mp.start();
-                break;
-        }
-    }
 }
+
+
+
+
+

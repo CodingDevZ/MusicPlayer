@@ -56,16 +56,19 @@ public class MainActivity extends AppCompatActivity {
     public ArrayList<File> findSongs(File root) {
         ArrayList<File> arrayList = new ArrayList<File>();
         File[] files = root.listFiles();
-        for (File singleFile : files) {
-            if (singleFile.isDirectory() && !singleFile.isHidden()) {
-                arrayList.addAll(findSongs(singleFile));
-            } else {
-                if (singleFile.getName().endsWith(".mp3") || singleFile.getName().endsWith(".wav")) {
-                    arrayList.add(singleFile);
+        if (files != null) {
+            for (File singleFile : files) {
+                if (singleFile.isDirectory() && !singleFile.isHidden()) {
+                    arrayList.addAll(findSongs(singleFile));
+                } else {
+                    if (singleFile.getName().endsWith(".mp3") || singleFile.getName().endsWith(".wav")) {
+                        arrayList.add(singleFile);
+                    }
                 }
             }
+
         }
         return arrayList;
     }
-
 }
+
