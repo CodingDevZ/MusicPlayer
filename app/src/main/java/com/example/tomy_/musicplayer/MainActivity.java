@@ -13,8 +13,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
-
 import java.io.File;
 import java.util.ArrayList;
 
@@ -28,19 +26,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        boolean Theme1= preferences.getBoolean("Theme1", false);
         boolean Theme2= preferences.getBoolean("Theme2", false);
+        boolean Theme1= preferences.getBoolean("Theme1", false);
 
-        if(Theme1) {
-            setTheme(R.style.Theme1);
-        }
-        else if(Theme2) {
+        if(Theme2) {
             setTheme(R.style.Theme2);
+        }
+        else if(Theme1) {
+            setTheme(R.style.Theme1);
         }
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         initWidgets();
 
         final ArrayList<File> mySongs = findSongs(Environment.getExternalStorageDirectory());
@@ -108,8 +108,8 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent intent = new Intent(MainActivity.this,Preference.class);
-            startActivity(intent);
+            Intent intent2 = new Intent(MainActivity.this,Preference.class);
+            startActivity(intent2);
             return true;
         }
 

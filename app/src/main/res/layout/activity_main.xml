@@ -4,14 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.tomy_.musicplayer.MainActivity"
-    android:background="?attr/backgroundcolor">
+    android:background="?attr/backgroundColor">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:minHeight="?attr/actionBarSize"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:textColor="?attr/textColor">
+        android:layout_height="64dp">
     </android.support.v7.widget.Toolbar>
 
     <ListView
@@ -19,6 +18,5 @@
         android:layout_height="fill_parent"
         android:id="@+id/lvPlaylist"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/toolbar"
-        android:textColor="?attr/textColor" />
+        android:layout_below="@+id/toolbar"/>
 </RelativeLayout>
