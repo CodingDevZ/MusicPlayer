@@ -1,10 +1,14 @@
 <resources>
     <string name="app_name">MusicPlayer</string>
     <string name="action_settings">Settings</string>
+    <string name="theme_2">Theme 2</string>
+    <string name="theme_1">Theme 1</string>
+    <string name="black">Black</string>
+    <string name="white">White</string>
 
     <string-array name="themes">
-        <item>Theme1</item>
-        <item>Theme2</item>
+        <item>Bijela</item>
+        <item>Crna</item>
     </string-array>
 
 

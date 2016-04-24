@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.tomy_.musicplayer.MainActivity"
-    android:background="?attr/backgroundColor">
+    tools:context="com.example.tomy_.musicplayer.MainActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -18,5 +17,8 @@
         android:layout_height="fill_parent"
         android:id="@+id/lvPlaylist"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/toolbar"/>
+        android:layout_below="@+id/toolbar" />
+
+
 </RelativeLayout>
+

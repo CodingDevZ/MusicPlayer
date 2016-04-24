@@ -10,55 +10,53 @@
     tools:context="com.example.tomy_.musicplayer.Player">
 
     <SeekBar
+        android:id="@+id/seekBar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/seekBar"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="81dp" />
 
-    <Button
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-        android:text="&lt;&lt;"
+    <ImageButton
         android:id="@+id/btnBack"
-        android:layout_alignTop="@+id/btnPrev"
-        android:layout_toRightOf="@+id/btnPrev"
-        android:layout_toEndOf="@+id/btnPrev" />
-
-    <Button
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-        android:text="||"
-        android:id="@+id/btnPlay"
-        android:layout_alignTop="@+id/btnBack"
-        android:layout_toRightOf="@+id/btnBack"
-        android:layout_toEndOf="@+id/btnBack" />
-
-    <Button
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-        android:text=">>"
-        android:id="@+id/btnForw"
-        android:layout_alignTop="@+id/btnPlay"
-        android:layout_toLeftOf="@+id/btnNext"
-        android:layout_toStartOf="@+id/btnNext" />
-
-    <Button
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-        android:text="|&lt;"
-        android:id="@+id/btnPrev"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="37dp"
+        android:layout_marginRight="37dp"
+        android:background="@mipmap/rewbackbutton"
+        android:scaleType="fitXY"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_toLeftOf="@+id/btnPlay"
+        android:layout_toStartOf="@+id/btnPlay" />
 
-    <Button
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-        android:text=">|"
-        android:id="@+id/btnNext"
-        android:layout_alignTop="@+id/btnForw"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+    <ImageButton
+        android:id="@+id/btnPlay"
+        android:layout_width="37dp"
+        android:layout_height="37dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@mipmap/playbtn"
+        android:scaleType="fitXY" />
+
+    <ImageButton
+        android:id="@+id/btnForw"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="37dp"
+        android:layout_marginStart="37dp"
+        android:background="@mipmap/rewforwbtn"
+        android:scaleType="fitXY"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/btnPlay"
+        android:layout_toEndOf="@+id/btnPlay" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@mipmap/imageview"
+        android:id="@+id/imageView"
+        android:layout_marginTop="93dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

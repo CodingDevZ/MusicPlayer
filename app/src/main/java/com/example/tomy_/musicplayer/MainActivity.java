@@ -13,27 +13,30 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+
+
 import java.io.File;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     ListView lvPlaylist;
+    TextView textView;
     String[] items;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        boolean Theme2= preferences.getBoolean("Theme2", false);
-        boolean Theme1= preferences.getBoolean("Theme1", false);
+        boolean Theme2= preferences.getBoolean("White", false);
+        boolean Theme1= preferences.getBoolean("Black", false);
 
         if(Theme2) {
-            setTheme(R.style.Theme2);
+            setTheme(R.style.White);
         }
         else if(Theme1) {
-            setTheme(R.style.Theme1);
+            setTheme(R.style.Black);
         }
 
         super.onCreate(savedInstanceState);
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         initWidgets();
 
         final ArrayList<File> mySongs = findSongs(Environment.getExternalStorageDirectory());
@@ -63,16 +67,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
     private void initWidgets() {
 
         lvPlaylist = (ListView) findViewById(R.id.lvPlaylist);
+        textView = (TextView) findViewById(R.id.textView);
         Toolbar topToolBar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(topToolBar);
 
-
     }
-
 
     public ArrayList<File> findSongs(File root) {
         ArrayList<File> arrayList = new ArrayList<File>();
@@ -96,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
         return true;
     }
 
