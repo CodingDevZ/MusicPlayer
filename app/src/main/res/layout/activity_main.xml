@@ -1,24 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.tomy_.musicplayer.MainActivity">
+    tools:context="com.example.tomy_.musicplayer.MainActivity"
+    android:id="@+id/drawer_layout">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:minHeight="?attr/actionBarSize"
+    <LinearLayout
+        android:id="@+id/layout_main"
         android:layout_width="match_parent"
-        android:layout_height="64dp">
-    </android.support.v7.widget.Toolbar>
-
-    <ListView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/lvPlaylist"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/toolbar" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
-</RelativeLayout>
+        <include layout="@layout/toolbar_layou" />
+
+        <ListView
+            android:id="@+id/lvPlaylist"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/toolbar"
+            android:layout_centerHorizontal="true" />
+
+    </LinearLayout>
+
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/drawer_menu"
+        app:headerLayout="@layout/navigation_drawer_header"
+        android:layout_marginTop="@dimen/abc_action_bar_default_height_material">
+
+    </android.support.design.widget.NavigationView>
+
+
+</android.support.v4.widget.DrawerLayout>
 
